@@ -11,6 +11,7 @@ import { TimelinePanel } from './components/trip-builder/TimelinePanel';
 import { AdaptationBar } from './components/trip-builder/AdaptationBar';
 import { SwapStopModal } from './components/trip-builder/SwapStopModal';
 import { DigitalTwinPanel } from './components/trip-builder/DigitalTwinPanel';
+import { HeroSection } from './components/explore/HeroSection';
 import { VendorPortal } from './components/vendor/VendorPortal';
 import { TermsOfService } from './components/legal/TermsOfService';
 import { PrivacyPolicy } from './components/legal/PrivacyPolicy';
@@ -78,10 +79,24 @@ const MainContent: React.FC = () => {
       </div>
 
       {/* Main Sliding Content View */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* For the explore view we remove horizontal constraints so HeroSection can be full-bleed.
+          All other views keep max-w-7xl + gutters. */}
+      <main className={`flex-1 w-full ${currentView !== 'explore' ? 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8' : ''}`}>
         <div key={currentView} className={animationClass}>
-          {/* View 1: Explore Feed */}
-          {currentView === 'explore' && <ExploreFeed />}
+
+          {/* ── View 1: Sunlit Meadow Hero + Explore Feed ── */}
+          {currentView === 'explore' && (
+            <div>
+              {/* Hero is full-bleed; it uses the 100vw / translateX(-50%) escape trick */}
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <HeroSection />
+              </div>
+              {/* Explore feed sits below in the normal constrained column */}
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+                <ExploreFeed />
+              </div>
+            </div>
+          )}
 
           {/* View 2: Custom Trip Builder & Dynamic Itinerary */}
           {currentView === 'trip-builder' && (
