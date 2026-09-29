@@ -3,7 +3,13 @@
  * Connects frontend to FastAPI backend (/api proxy or direct)
  */
 
-const API_BASE = '/api';
+// In development, Vite proxies /api → http://127.0.0.1:8000 (see vite.config.ts).
+// In production on Vercel, set VITE_API_URL to your Render backend URL, e.g.:
+//   https://foodloop-backend.onrender.com
+// The /api prefix is kept so local dev always works without extra config.
+const API_BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : '/api';
 
 export interface UserSession {
   user_id: number;
