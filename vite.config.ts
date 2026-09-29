@@ -223,6 +223,18 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
+    server: {
+      port: 5173,
+      watch: {
+        ignored: ['**/*.zip', '**/*.log', '**/node_modules/**'],
+      },
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:8000',
+          changeOrigin: true,
+        }
+      }
+    },
     plugins: [
       react(),
       tailwindcss(),

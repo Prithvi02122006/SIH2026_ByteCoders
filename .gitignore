@@ -23,11 +23,22 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables — NEVER commit real secrets
 .env
 .env*.local
+.env.production
+
+# Backend / Python
+backend/__pycache__/
+backend/*.pyc
+backend/foodloop.db
+__pycache__/
+*.pyc
+*.pyo
+
+# Zip archives
+*.zip
 
 # Nested unzipped duplicate folder
 hackceletial-patchedfinal/
 training-data/
-

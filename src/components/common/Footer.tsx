@@ -1,97 +1,116 @@
 import React from 'react';
-import { useApp } from '../../context/AppContext';
+import { ShieldCheck, ExternalLink, Leaf } from 'lucide-react';
 
-export const Footer: React.FC = () => {
-  const { navigateTo } = useApp();
+interface FooterProps {
+  setCurrentTab: (tab: string) => void;
+}
 
+export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
   return (
-    <footer className="bg-[#FFFFFF] border-t border-[#E2E6EC] mt-16 text-sm text-[#4B5563]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-[#1B3A6B] rounded-[2px] flex items-center justify-center text-white font-serif text-sm font-bold">
-                P
+    <footer className="mt-20 border-t border-[#E5DECE] bg-[#F7F2E4] text-[#3D3B34] text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+          {/* Col 1: Brand & Regulatory Statement */}
+          <div className="md:col-span-2 space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-[#2D431E] flex items-center justify-center text-[#FBF3DC]">
+                <span className="font-serif font-bold text-xs">FL</span>
               </div>
-              <span className="font-serif font-bold text-base text-[#111827]">Passage</span>
+              <span className="font-serif text-lg font-bold text-[#1F201C]">FoodLoop India</span>
             </div>
-            <p className="text-xs text-[#6B7280] leading-relaxed">
-              Intelligent local experiences and real-time dynamic tour planning. Sourced directly from independent neighborhood merchants and artisan guilds.
+            <p className="text-xs text-[#64625A] leading-relaxed max-w-md">
+              A multi-stakeholder food intelligence and surplus redistribution platform engineered for institutional messes, hostels, cafeterias, caterers, and food banks across Indian cities.
             </p>
+            <div className="flex items-center gap-2 text-[11px] text-[#3D5528] font-medium pt-1">
+              <ShieldCheck className="w-4 h-4 text-[#5F7A3E]" />
+              <span>Compliant with FSSAI (Recovery and Distribution of Surplus Food) Regulations, 2019</span>
+            </div>
           </div>
 
-          <div>
-            <h4 className="text-xs uppercase font-semibold text-[#111827] tracking-wider mb-3">
-              Platform
-            </h4>
-            <ul className="space-y-2 text-xs">
+          {/* Col 2: Platform Links */}
+          <div className="space-y-2">
+            <h5 className="font-serif font-bold text-sm text-[#1F201C] tracking-tight">Platform</h5>
+            <ul className="space-y-1.5 text-xs text-[#64625A]">
               <li>
-                <button
-                  onClick={() => navigateTo('explore')}
-                  className="hover:text-[#1B3A6B] text-left transition-colors"
-                >
-                  Explore Local Experiences
+                <button onClick={() => setCurrentTab('landing')} className="hover:text-[#1F201C] hover:underline">
+                  Home & Overview
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('trip-builder')}
-                  className="hover:text-[#1B3A6B] text-left transition-colors"
-                >
-                  Dynamic Trip Planner
+                <button onClick={() => setCurrentTab('insights-lab')} className="hover:text-[#1F201C] hover:underline">
+                  Public Insights Lab
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('vendor-portal')}
-                  className="hover:text-[#1B3A6B] text-left transition-colors"
-                >
-                  Local Vendor Onboarding
+                <button onClick={() => setCurrentTab('methodology')} className="hover:text-[#1F201C] hover:underline">
+                  Data Sources & Methodology
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentTab('about')} className="hover:text-[#1F201C] hover:underline">
+                  About & Contact
                 </button>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs uppercase font-semibold text-[#111827] tracking-wider mb-3">
-              Accessibility & Ethics
-            </h4>
-            <p className="text-xs text-[#6B7280] leading-relaxed">
-              Every route calculation supports step-free verification, senior-friendly pacing buffers, and low-sensory sanctuary indicators without automated profiling.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="text-xs uppercase font-semibold text-[#111827] tracking-wider mb-3">
-              Legal & Compliance
-            </h4>
-            <ul className="space-y-2 text-xs">
+          {/* Col 3: Regulatory & External Benchmarks */}
+          <div className="space-y-2">
+            <h5 className="font-serif font-bold text-sm text-[#1F201C] tracking-tight">Official Sources</h5>
+            <ul className="space-y-1.5 text-xs text-[#64625A]">
               <li>
-                <button
-                  onClick={() => navigateTo('terms')}
-                  className="hover:text-[#1B3A6B] text-left transition-colors"
+                <a
+                  href="https://fssai.gov.in"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-[#1F201C]"
                 >
-                  Terms of Service
-                </button>
+                  FSSAI India Portal <ExternalLink className="w-3 h-3 text-[#8F8D84]" />
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('privacy')}
-                  className="hover:text-[#1B3A6B] text-left transition-colors"
+                <a
+                  href="https://data.gov.in"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-[#1F201C]"
                 >
-                  Privacy Policy
-                </button>
+                  Open Government Data (data.gov.in) <ExternalLink className="w-3 h-3 text-[#8F8D84]" />
+                </a>
               </li>
               <li>
-                <span className="text-[#9CA3AF] text-xs">Merchant Verification Standard</span>
+                <a
+                  href="https://www.unep.org/resources/publication/food-waste-index-report-2024"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-[#1F201C]"
+                >
+                  UNEP Food Waste Index 2024 <ExternalLink className="w-3 h-3 text-[#8F8D84]" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wrap.org.uk/resources/guide/food-waste-carbon-metric"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-[#1F201C]"
+                >
+                  WRAP Carbon Metric (2.5 kg CO2e) <ExternalLink className="w-3 h-3 text-[#8F8D84]" />
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 mt-8 border-t border-[#E2E6EC] flex flex-col sm:flex-row items-center justify-between text-xs text-[#9CA3AF]">
-          <div>Passage Tour Platform. Pan-India Regional Network.</div>
-          <div className="mt-2 sm:mt-0">Direct-manipulation travel planning. No automated chat agents.</div>
+        {/* Bottom row */}
+        <div className="pt-8 border-t border-[#E5DECE] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#64625A]">
+          <div className="flex items-center gap-2">
+            <Leaf className="w-3.5 h-3.5 text-[#5F7A3E]" />
+            <span>Zero pre-filled fake data. Real entries marked with source tags. Indian metric standards (kg, INR ₹, DD/MM/YYYY).</span>
+          </div>
+          <div>
+            <span>FoodLoop Engine v1.0 • Built for Indian Institutional Hospitality & Dining</span>
+          </div>
         </div>
       </div>
     </footer>
